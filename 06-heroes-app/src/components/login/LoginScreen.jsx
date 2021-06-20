@@ -7,15 +7,15 @@ export const LoginScreen = ({ history }) => {
     const { dispatch } = useContext(AuthContext);
 
     const handleLogin = () => {
-        // history.replace('/');
+        const lastPath = localStorage.getItem('lastPath') || '/';
+        
         dispatch({
             type: types.login,
             payload: {
                 name: 'Larios'
             }
         });
-
-        history.replace('/');
+        history.replace(lastPath);
     }
 
     return (
