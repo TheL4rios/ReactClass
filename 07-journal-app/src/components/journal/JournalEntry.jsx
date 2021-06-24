@@ -1,27 +1,43 @@
-import React from 'react'
+import React from 'react';
+import moment from "moment";
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
 
-export const JournalEntry = () => {
+export const JournalEntry = ({ _id, title, body, url, date }) => {
+
+    const dispatch = useDispatch();
+    const noteDate = moment(date);
+
+    const handleActiveNote = () => {
+        dispatch(activeNote(_id, {
+            date, title, body, url
+        }));
+    }
+
     return (
-        <div className="journal__entry pointer">
-            <div 
-                style={{
-                    backgroundSize: 'cover',
-                    backgroundImage: 'url(https://es.rankiapro.com/wp-content/uploads/2019/08/fondo-tecnologico-preferido-selectores.jpg)'
-                }}
-                className="journal__entry-picture"
-            ></div>
+        <div className="journal__entry pointer" onClick={ handleActiveNote }>
+            {
+                url &&
+                <div 
+                    style={{
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${url})`
+                    }}
+                    className="journal__entry-picture"
+                ></div>
+            }
             <div className="journal__entry-body">
                 <p className="journal__entry-title">
-                    Un nuevo día
+                    { title }
                 </p>
                 <p className="journal__entry-content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    { body }
                 </p>
             </div>
 
             <div className="journal__entry-date-box">
-                <span>Monday</span>
-                <h4>28</h4>
+                <span>{ noteDate.format('dddd') }</span>
+                <h4>{ noteDate.format('Do') }</h4>
             </div>
         </div>
     )
