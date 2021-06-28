@@ -14,6 +14,7 @@ router.post(
         fieldValidator
     ], 
     createUser);
+
 router.post(
     '/', 
     [ 
@@ -22,6 +23,7 @@ router.post(
         fieldValidator
     ], 
     loginUser);
+    
 router.get('/renew', jwtValidator, renewToken);
 
 module.exports = router;
