@@ -12,7 +12,7 @@ const getEvents = async (req, res = response) => {
     });
 }
 
-const createEvent = (req, res = response) => {
+const createEvent = async (req, res = response) => {
 
     const event = new Event(req.body);
 
